@@ -23,7 +23,7 @@ def redact_text(text):
     if filter_email:
         text = re.sub(r'[\w\.-]+@[\w\.-]+\.\w+', '[REDACTED_EMAIL]', text)
     if filter_phone:
-        text = re.sub(r'\+?\d{1,4}[-.\s]?\d{1,10}[-.\s]?\d{1,10}', '[REDACTED_PHONE]', text)
+        text = re.sub(r"\+?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{3,4}[-.\s]?\d{3,4}", '[REDACTED_PHONE]', text)
     if filter_card:
         text = re.sub(r'\b\d{4}[-.\s]?\d{4}[-.\s]?\d{4}[-.\s]?\d{4}\b', '[REDACTED_CREDIT_CARD]', text)
     if filter_ghana:
@@ -74,7 +74,7 @@ CRITICAL PRIVACY RULE:
 - If you notice a name (like Ebenezer) that slipped past the initial filters, you MUST redact it or use a neutral pronoun (e.g., "The user") in your summary.
 
 Text to summarize:
-{safe_text}
+{cleaned_text}
 """
                 
                 response = client.models.generate_content(
