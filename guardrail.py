@@ -29,7 +29,7 @@ GHANA_CARD_PATTERN = re.compile(
 
 # Common phone formats (international + local-style): +233..., 0XX..., with spaces/dashes.
 PHONE_PATTERN = re.compile(
-    r"(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{3,4}\b"
+    r"\+?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{3,4}[-.\s]?\d{3,4}"
 )
 
 REDACTION_RULES: list[tuple[re.Pattern[str], str]] = [

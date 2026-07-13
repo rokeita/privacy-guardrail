@@ -66,7 +66,16 @@ if st.button("Process Securely", use_container_width=True):
         with st.spinner("Sending safe text to Gemini..."):
             try:
                 client = genai.Client(api_key=api_key)
-                prompt = f"Write a short, professional executive summary based ONLY on this safe, redacted text:\n\n{safe_text}"
+                prompt = f"""
+You are a privacy-first executive assistant. Your task is to summarize the following text. 
+
+CRITICAL PRIVACY RULE: 
+- Never include real names, specific phone numbers, or locations in your summary. 
+- If you notice a name (like Ebenezer) that slipped past the initial filters, you MUST redact it or use a neutral pronoun (e.g., "The user") in your summary.
+
+Text to summarize:
+{cleaned_text}
+"""
                 
                 response = client.models.generate_content(
                     model='gemini-3.5-flash',
