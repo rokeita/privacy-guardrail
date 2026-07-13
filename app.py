@@ -45,12 +45,12 @@ if st.button("Process Securely", use_container_width=True):
         
         # Display Redaction Results
         st.subheader("📋 Cleaned (Safe) Text")
-        st.info(safe_text)
+        st.info(cleaned_text)
         
         # NEW feature: One-click download button
         st.download_button(
             label="📥 Download Cleared Text (.txt)",
-            data=safe_text,
+            data=cleaned_text,
             file_name="sanitized_document.txt",
             mime="text/plain",
             use_container_width=True
