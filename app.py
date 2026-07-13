@@ -41,7 +41,7 @@ if st.button("Process Securely", use_container_width=True):
         # Step 1: Local Redaction
         with st.spinner("Locally scanning and redacting sensitive data..."):
             time.sleep(0.5)
-            safe_text = redact_pii(user_input)  # Or whatever your variable name is!
+            safe_text = redact_pii(user_input)
         
         # Display Redaction Results
         st.subheader("📋 Cleaned (Safe) Text")
