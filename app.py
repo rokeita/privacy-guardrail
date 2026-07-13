@@ -41,7 +41,7 @@ if st.button("Process Securely", use_container_width=True):
         # Step 1: Local Redaction
         with st.spinner("Locally scanning and redacting sensitive data..."):
             time.sleep(0.5)
-            safe_text = redact_text(user_input)
+            safe_text = redact_pii(user_input)  # Or whatever your variable name is!
         
         # Display Redaction Results
         st.subheader("📋 Cleaned (Safe) Text")
@@ -74,7 +74,7 @@ CRITICAL PRIVACY RULE:
 - If you notice a name (like Ebenezer) that slipped past the initial filters, you MUST redact it or use a neutral pronoun (e.g., "The user") in your summary.
 
 Text to summarize:
-{cleaned_text}
+{safe_text}
 """
                 
                 response = client.models.generate_content(
