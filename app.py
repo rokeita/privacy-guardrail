@@ -20,14 +20,14 @@ filter_ghana = st.sidebar.checkbox("Ghana Cards", value=True)
 
 # Dynamic Redaction Logic
 def redact_text(text):
-    # Order matters: cards and Ghana Card IDs must be matched before the
-    # broader phone pattern, which would otherwise swallow their digits.
+    # Order matters: emails first (so digits inside them can't break the match),
+    # then cards and Ghana Card IDs before the broader phone pattern.
+    if filter_email:
+        text = re.sub(r'[\w\.-]+@[\w\.-]+\.\w+', '[REDACTED_EMAIL]', text)
     if filter_card:
         text = re.sub(r'\b\d{4}[-.\s]?\d{4}[-.\s]?\d{4}[-.\s]?\d{4}\b', '[REDACTED_CREDIT_CARD]', text)
     if filter_ghana:
         text = re.sub(r'GHA-\d{9}-\d', '[REDACTED_GHANA_CARD]', text, flags=re.IGNORECASE)
-    if filter_email:
-        text = re.sub(r'[\w\.-]+@[\w\.-]+\.\w+', '[REDACTED_EMAIL]', text)
     if filter_phone:
         text = re.sub(r"\+?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{3,4}[-.\s]?\d{3,4}", '[REDACTED_PHONE]', text)
     return text
